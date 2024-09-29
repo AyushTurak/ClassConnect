@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.classconnect.Attendance_Dashboard.Attendance
 import com.example.classconnect.Authentication.SignUp.SignUp
 import com.example.classconnect.MainActivity // Assuming you have a MainActivity after login
 import com.example.classconnect.R
@@ -69,7 +70,7 @@ class Login : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign-in successful
-                    val intent = Intent(this, MainActivity::class.java) // Navigate to the main app
+                    val intent = Intent(this, Attendance::class.java) // Navigate to the main app
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
