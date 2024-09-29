@@ -1,0 +1,85 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#F5F5F5"
+    android:padding="16dp">
+
+    <!-- Student Name Input -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Student Name"
+        android:textColor="#2196F3"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"
+        android:fontFamily="sans-serif-medium"/>
+
+    <EditText
+        android:id="@+id/studentName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#2196F3"
+        android:hint="Student Name"
+        android:textColor="#424242"
+        android:padding="12dp"
+        android:fontFamily="sans-serif"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Combo Box for Subject -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Subject"
+        android:textColor="#2196F3"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"
+        android:fontFamily="sans-serif-medium"/>
+
+    <Spinner
+        android:id="@+id/subjectSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/spinner_background"
+        android:layout_marginBottom="16dp"
+        android:popupBackground="#FFFFFF"
+        android:padding="12dp"/>
+
+    <!-- Marks Input -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Practicals"
+        android:textColor="#2196F3"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"
+        android:fontFamily="sans-serif-medium"/>
+
+    <EditText
+        android:id="@+id/marksInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#2196F3"
+        android:hint="Marks"
+        android:inputType="number"
+        android:textColor="#424242"
+        android:padding="12dp"
+        android:fontFamily="sans-serif"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:backgroundTint="#2196F3"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:fontFamily="sans-serif-medium"/>
+
+</LinearLayout>
