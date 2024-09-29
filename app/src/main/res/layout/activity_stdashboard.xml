@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#F8F6E3"
-                android:text="Syllabus"
+                android:text="Quiz"
                 android:textColor="#121212"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/button6"

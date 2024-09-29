@@ -9,6 +9,10 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="timetable_desc">TimeTable</string>
+    <string name="quiz">Quiz</string>
+    <string name="progressbg_desc">Progress</string>
+    <string name="attendance_desc">Attendance</string>
     <string-array name="roles_array">
         <item>Teacher</item>
         <item>Student</item>
