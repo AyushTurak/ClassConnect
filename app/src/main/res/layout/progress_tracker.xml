@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+<!--    <TableLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="80sp">-->
+
+<!--        <TableRow android:layout_height="131dp">-->
+
+<!--            <ImageButton-->
+<!--                android:layout_width="60sp"-->
+<!--                android:layout_height="60sp"-->
+<!--                android:layout_margin="20sp"-->
+<!--                android:background="@drawable/border_pt"-->
+<!--                android:backgroundTint="#D7D5D5" />-->
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="20sp"-->
+<!--                android:text="[ Your NAME ]"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textAlignment="textEnd"-->
+<!--                android:paddingLeft="150sp"-->
+<!--                android:paddingTop="10sp"-->
+<!--                android:textStyle="bold"-->
+<!--                />-->
+<!--        </TableRow>-->
+<!--    </TableLayout>-->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/progress"
+        />
+
+</LinearLayout>
