@@ -8,15 +8,22 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.classconnect.Authentication.Login.Login
+import com.example.classconnect.DashBoard.Student.stdashboard
 import com.example.classconnect.R
+import com.example.classconnect.chat.User
+import com.example.classconnect.chat.chat
 import com.example.classconnect.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class SignUp : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var mAuth : FirebaseAuth
+    private lateinit var mDbRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +35,7 @@ class SignUp : AppCompatActivity() {
 
         // Set up Spinner for role selection
         val roleSpinner: Spinner = findViewById(R.id.roleSpinner)
+
         val adapter = ArrayAdapter.createFromResource(
             this,
             R.array.roles_array,
@@ -84,8 +92,10 @@ class SignUp : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // User registered successfully
+                    val name = "Anonymus"
+                    mAuth =FirebaseAuth.getInstance()
                     val user = firebaseAuth.currentUser
-
+                    addUserToDatabase(name,email,mAuth.currentUser?.uid!!)
                     // Add role to user profile or database
                     val profileUpdates = UserProfileChangeRequest.Builder()
                         .setDisplayName(role)  // Set role in display name or save in database
@@ -97,7 +107,7 @@ class SignUp : AppCompatActivity() {
                                 Toast.makeText(this, "Sign Up Successful!", Toast.LENGTH_SHORT).show()
 
                                 // Redirect to Login screen
-                                val intent = Intent(this, Login::class.java)
+                                val intent = Intent(this,  stdashboard::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                                 startActivity(intent)
                                 finish()
@@ -110,5 +120,11 @@ class SignUp : AppCompatActivity() {
                     Toast.makeText(this, "Sign Up Failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
+    }
+
+    private fun addUserToDatabase(name: String?, email: String, uid: String?) {
+        mDbRef = FirebaseDatabase.getInstance().getReference()
+
+        mDbRef.child("user").child(uid!!).setValue(User(name, email, uid))
     }
 }
