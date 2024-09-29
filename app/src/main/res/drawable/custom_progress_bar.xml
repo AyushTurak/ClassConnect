@@ -1,0 +1,28 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background of the circular progress bar (Grey) -->
+    <item android:id="@android:id/background">
+        <shape android:shape="ring"
+            android:useLevel="false">
+            <solid android:color="#B0BEC5"/> <!-- Grey color -->
+        </shape>
+    </item>
+
+    <!-- Secondary progress (White) -->
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape android:shape="ring">
+                <solid android:color="#FFFFFF"/> <!-- White color -->
+            </shape>
+        </clip>
+    </item>
+
+    <!-- Progress (Blue) -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="ring">
+                <solid android:color="#2196F3"/> <!-- Blue color -->
+            </shape>
+        </clip>
+    </item>
+</layer-list>
