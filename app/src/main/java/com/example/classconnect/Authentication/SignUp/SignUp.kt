@@ -1,36 +1,114 @@
 package com.example.classconnect.Authentication.SignUp
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.util.Patterns
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.classconnect.Authentication.Login.Login
 import com.example.classconnect.R
+import com.example.classconnect.databinding.ActivitySignUpBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 
 class SignUp : AppCompatActivity() {
+
+    private lateinit var binding: ActivitySignUpBinding
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_sign_up)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-            val roleSpinner: Spinner = findViewById(R.id.roleSpinner)
+        // Initialize Firebase Auth
+        firebaseAuth = FirebaseAuth.getInstance()
 
-            // Create an ArrayAdapter using the string array and a default spinner layout
-            val adapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.roles_array, // Your string array resource
-                android.R.layout.simple_spinner_item
-            )
+        // Set up Spinner for role selection
+        val roleSpinner: Spinner = findViewById(R.id.roleSpinner)
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.roles_array,
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        roleSpinner.adapter = adapter
 
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Set up sign-up button click listener
+        binding.signupbtn.setOnClickListener {
+            val email = binding.signupname.text.toString().trim()
+            val password = binding.signuppass.text.toString().trim()
+            val confirmPassword = binding.confirmPasswordEditText.text.toString().trim()
+            val selectedRole = roleSpinner.selectedItem.toString()
 
-            // Apply the adapter to the spinner
-            roleSpinner.adapter = adapter
+            // Input validation
+            if (email.isEmpty()) {
+                binding.signupname.error = "Email is required"
+                binding.signupname.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                binding.signupname.error = "Please provide a valid email"
+                binding.signupname.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (password.isEmpty()) {
+                binding.signuppass.error = "Password is required"
+                binding.signuppass.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (password.length < 6) {
+                binding.signuppass.error = "Password should be at least 6 characters long"
+                binding.signuppass.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (password != confirmPassword) {
+                binding.confirmPasswordEditText.error = "Passwords do not match"
+                binding.confirmPasswordEditText.requestFocus()
+                return@setOnClickListener
+            }
+
+            // Call Firebase Auth to create user
+            registerUser(email, password, selectedRole)
         }
+    }
+
+    private fun registerUser(email: String, password: String, role: String) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // User registered successfully
+                    val user = firebaseAuth.currentUser
+
+                    // Add role to user profile or database
+                    val profileUpdates = UserProfileChangeRequest.Builder()
+                        .setDisplayName(role)  // Set role in display name or save in database
+                        .build()
+
+                    user?.updateProfile(profileUpdates)
+                        ?.addOnCompleteListener { updateTask ->
+                            if (updateTask.isSuccessful) {
+                                Toast.makeText(this, "Sign Up Successful!", Toast.LENGTH_SHORT).show()
+
+                                // Redirect to Login screen
+                                val intent = Intent(this, Login::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(this, "Failed to update role.", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                } else {
+                    // Sign-up failed, display error message
+                    Toast.makeText(this, "Sign Up Failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 }

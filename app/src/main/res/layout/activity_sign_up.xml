@@ -64,6 +64,18 @@
             android:padding="15dp"
             android:textSize="16sp" />
 
+        <EditText
+            android:id="@+id/confirmPasswordEditText"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border_login"
+            android:ems="10"
+            android:hint="confirm password"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textSize="16sp" />
+
         <Spinner
             android:id="@+id/roleSpinner"
             android:layout_width="250dp"

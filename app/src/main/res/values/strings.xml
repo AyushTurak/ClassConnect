@@ -4,4 +4,5 @@
         <item>Admin</item>
         <item>Manager</item>
     </string-array>
+    <string name="app_name">Class Connect</string>
 </resources>
