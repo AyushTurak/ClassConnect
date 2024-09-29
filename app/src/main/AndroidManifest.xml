@@ -10,13 +10,31 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ClassConnect"
+        android:theme="@style/Base.Theme.ClassConnect"
         tools:targetApi="31">
+        <activity
+            android:name=".Quiz.Quiz_Score"
+            android:exported="false" />
+        <activity
+            android:name=".Quiz.QuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Progress.ProgressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".chat.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".chat.chat"
+            android:exported="false" />
         <activity
             android:name=".Attendance_Dashboard.Attendance"
             android:exported="false" />
         <activity
             android:name=".Authentication.SignUp.SignUp"
+            android:exported="false" />
+        <activity
+            android:name=".DashBoard.Student.stdashboard"
             android:exported="false" />
         <activity
             android:name=".Authentication.Login.Login"
