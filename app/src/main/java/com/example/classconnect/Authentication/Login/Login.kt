@@ -72,7 +72,7 @@ class Login : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign-in successful
-                    val intent = Intent(this, QuizActivity::class.java) // Navigate to the main app
+                    val intent = Intent(this, stdashboard::class.java) // Navigate to the main app
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()

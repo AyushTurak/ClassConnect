@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.classconnect.Attendance_Dashboard.Attendance
 import com.example.classconnect.Progress.ProgressActivity
+import com.example.classconnect.Quiz.QuizActivity
 import com.example.classconnect.R
 import com.example.classconnect.databinding.ActivityAttendanceBinding
 import com.example.classconnect.databinding.ActivityLoginBinding
@@ -24,13 +25,22 @@ class stdashboard : AppCompatActivity() {
 
        binding.attendenceBtn.setOnClickListener {
            val intent = Intent(this,  Attendance::class.java) // Navigate to the main app
-
            startActivity(intent)
        }
        binding.button6.setOnClickListener {
            val intent = Intent(this,ProgressActivity::class.java)
            startActivity(intent)
        }
+
+        binding.timetableBtn.setOnClickListener {
+
+        }
+
+        binding.syllabusBtn.setOnClickListener {
+            val intent = Intent(this,QuizActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
     }
